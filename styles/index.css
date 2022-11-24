@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameboard {
+  display: grid;
+  grid-template: repeat(3, 64px)/repeat(3, 64px);
+}
+.gameboard div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+}
+
+/*# sourceMappingURL=index.css.map */
