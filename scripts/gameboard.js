@@ -8,10 +8,11 @@ export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) 
   let round = 1
   let currentPlayer = players[0]
   let gameOver = false
+  let timeout
 
   // FUNCTIONS
   function handleClick(e) {
-    if(gameOver) return
+    if(timeout || gameOver) return
     const domSquare = e.target
     if(domSquare.tagName === 'IMG') return // already marked
 
@@ -23,6 +24,7 @@ export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) 
   }
 
   function computerMove() {
+    timeout = null
     let freeSquare = checkForWinningSquare(board, currentPlayer)
     console.log(freeSquare)
 
@@ -58,7 +60,7 @@ export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) 
 
     currentPlayer = currentPlayer === players[0] ? players[1] : players[0]
     setCurrentPlayer(currentPlayer)
-    if(currentPlayer.isComputer()) setTimeout(computerMove, 750) // NEED TO DISABLE BOARD WHILE WAITING
+    if(currentPlayer.isComputer()) timeout = setTimeout(computerMove, 750)
   }
 
   function setGameOver() {
