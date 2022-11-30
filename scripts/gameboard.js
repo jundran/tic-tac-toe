@@ -1,7 +1,7 @@
 "use strict"
 import { checkForWinner, checkForWinningSquare } from "./check.js"
 
-export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) {
+export default function(setMessage, setCurrentPlayer, ...bothPlayers) {
   // GLOBAL STATE
   const board = []
   const players = [...bothPlayers]

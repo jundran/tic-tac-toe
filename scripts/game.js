@@ -13,8 +13,8 @@ document.querySelector('#player2').textContent = player2.getName()
 newGame()
 
 function newGame() {
-  document.getElementById('gameboard')
-    .replaceChildren(Gameboard(setMessage, setCurrentPlayer, player1, player2))
+  document.querySelector('.gameboard')
+    .replaceWith(Gameboard(setMessage, setCurrentPlayer, player1, player2))
 }
 
 function handleReset() {

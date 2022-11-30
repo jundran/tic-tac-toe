@@ -4,7 +4,8 @@
 https://jundran.github.io/tic-tac-toe/
 
 ## Description
-TOP - Tic Tac Toe project
+TOP - Tic Tac Toe project  
+Play Noughts and Crosses (AKA Tic Tac Toe) vs another human or a computer algorithm.
 
 ## Project Requirements
 https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe

@@ -17,13 +17,7 @@ export function checkForWinner(board) {
       return array.every(el => el.owner > 0 && el.owner === array[0].owner)
     }
   }
-
-  return(
-    checkRow(board) ||
-    checkRow(transpose(board)) ||
-    checkRow(transposeDiagnol(board)) ||
-    checkRow(transposeDiagnol(board, true))
-  )
+  return runChecks(checkRow, board)
 }
 
 export function checkForWinningSquare(board, currentPlayer) {
@@ -49,11 +43,14 @@ export function checkForWinningSquare(board, currentPlayer) {
     }
     return false
   }
+  return runChecks(checkRow, board)
+}
 
+const runChecks = (checkRow, board) => (function() {
   return(
     checkRow(board) ||
     checkRow(transpose(board)) ||
     checkRow(transposeDiagnol(board)) ||
     checkRow(transposeDiagnol(board, true))
   )
-}
+})()
