@@ -25,7 +25,8 @@ export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) 
 
   function computerMove() {
     timeout = null
-    let freeSquare = checkForWinningSquare(board, currentPlayer)
+    let freeSquare = checkForWinningSquare(board, currentPlayer) ||
+      checkForWinningSquare(board, players[0])
     console.log(freeSquare)
 
     // Find a random free square
