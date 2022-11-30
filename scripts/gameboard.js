@@ -9,14 +9,23 @@ export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) 
   let gameOver = false
 
   // FUNCTIONS
-  function handleClick(e) {
-    if(gameOver) return
-    const square = e.target
-    if(square.tagName === 'IMG') return // already marked
 
-    // Mark square
-    const [row, col] = square.dataset.index.split('-')
-    if (board[row][col] instanceof Object) return // already marked
+  // Does there need to be separate arrays for javascript and the UI?
+
+  function computerMove() {
+    // Find a random free square
+    const freeSquares = board.map(row => row.filter(square => !(square instanceof Object))).flat()
+    const freeSquare = freeSquares[Math.floor(Math.random() * freeSquares.length)]
+
+    // Find matching square in document and draw mark
+    const uiSquares = [...document.querySelectorAll('.gameboard div')]
+    const uiSquare = uiSquares.find(s => s.dataset.index === freeSquare)
+    const [row, col] = freeSquare.split('-')
+
+    endRound(uiSquare, row, col)
+  }
+
+  function endRound(square, row, col) {
     square.appendChild(currentPlayer.getMark())
     board[row][col] = currentPlayer
 
@@ -31,8 +40,22 @@ export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) 
       setGameOver()
       return setMessage('The game is a draw.')
     }
+
     currentPlayer = currentPlayer === players[0] ? players[1] : players[0]
     setCurrentPlayer(currentPlayer)
+    if(currentPlayer.isComputer()) setTimeout(computerMove, 1000) // NEED TO DISABLE BOARD WHILE WAITING
+  }
+
+  function handleClick(e) {
+    if(gameOver) return
+    const square = e.target
+    if(square.tagName === 'IMG') return // already marked
+
+    // Mark square
+    const [row, col] = square.dataset.index.split('-')
+    if (board[row][col] instanceof Object) return // already marked
+
+    endRound(square, row, col)
   }
 
   function checkForWinner() {
@@ -72,7 +95,6 @@ export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) 
     for(let row = 0; row < 3; row++) {
       board.push([])
       for(let col = 0; col < 3; col++) {
-        // push row-col to make element unique for comparison in checkForWinner
         board[row].push(`${row}-${col}`)
         const square = document.createElement('div')
         square.dataset.index = row + "-" + col

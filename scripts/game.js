@@ -5,8 +5,9 @@ import Player from "./player.js"
 document.querySelector('#reset-button').addEventListener('click', handleReset)
 
 const params = new URLSearchParams(window.location.search)
+const computer = params.get('playAgainstComputer') == 'on' ? true : false
 const player1 = Player(params.get('player1'), true)
-const player2 = Player(params.get('player2'))
+const player2 = computer ? Player(null) : Player(params.get('player2'))
 document.querySelector('#player1').textContent = player1.getName()
 document.querySelector('#player2').textContent = player2.getName()
 newGame()

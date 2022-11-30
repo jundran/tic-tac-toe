@@ -1,6 +1,16 @@
 "use strict"
 export default function Player(n, isPlayer1) {
-  const name = n || (isPlayer1 ? 'Player 1' : 'Player 2')
+  let playAgainstComputer = false
+  let name = n
+  if(!name) {
+    if(name === null) {
+      name = 'Computer'
+      playAgainstComputer = true
+    }
+    else {
+      name = isPlayer1 ? 'Player 1' : 'Player 2'
+    }
+  }
 
   function createCross() {
     const cross = document.createElement('img')
@@ -16,10 +26,12 @@ export default function Player(n, isPlayer1) {
   }
 
   const isPlayerOne = () => isPlayer1
+  const isComputer = () => playAgainstComputer
   const getMark = isPlayer1 ? () => createCross() : () => createNought()
   const getName = () => name
 
   return {
+    isComputer,
     isPlayerOne,
     getMark,
     getName
