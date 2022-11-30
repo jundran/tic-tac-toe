@@ -11,7 +11,8 @@ function transposeDiagnol(board, rightToLeft) {
 export function checkForWinner(board) {
   function checkRow(array) {
     if(array[0] instanceof Array) {
-      return array.map(row => row.every(el => el.owner > 0 && el.owner === row[0].owner)).includes(true)
+      return array.map(row =>
+        row.every(el => el.owner > 0 && el.owner === row[0].owner)).includes(true)
     }
     else {
       return array.every(el => el.owner > 0 && el.owner === array[0].owner)

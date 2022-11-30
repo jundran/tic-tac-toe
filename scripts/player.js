@@ -14,14 +14,14 @@ export default function Player(n, isPlayer1) {
 
   function createCross() {
     const cross = document.createElement('img')
-    cross.src = '../images/cross.svg'
+    cross.src = './images/cross.svg'
     cross.style.padding = '17%'
     return cross
   }
 
   function createNought() {
     const nought = document.createElement('img')
-    nought.src = '../images/nought.svg'
+    nought.src = './images/nought.svg'
     return nought
   }
 
