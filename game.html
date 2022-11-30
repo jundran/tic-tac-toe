@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/index.css">
+  <script src="scripts/game.js" defer type="module"></script>
+  <title>Noughts & Crosses</title>
+</head>
+<body>
+
+<div class="container">
+  <h1 class="game">Noughts & Crosses</h1>
+  <div class="game-message"></div>
+
+  <div class="match-info">
+    <span id ="player1" class="player active"></span>
+    <span id ="player2" class="player"></span>
+  </div>
+
+  <div id="gameboard"></div>
+
+  <div class="game-footer">
+    <button onclick="window.location.href='index.html'">Change players</button>
+    <button id="reset-button">Reset</button>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:ns1="http://sozi.baierouge.fr" xmlns:xlink="http://www.w3.org/1999/xlink" id="svg2974" viewBox="0 0 204 180" version="1.1" inkscape:version="0.91 r13725">
+  <path id="path2986" style="fill:#00ff77" d="m72.717 151.74c-11.885-4.45-15.162-7.21-22.666-19.1-8.129-12.88-8.417-35.396-0.699-54.456 9.373-23.143 12.944-29.512 21.148-37.716 4.4-4.4 8-8.493 8-9.096 0-0.60276-3.3671-1.8355-7.4824-2.7393-12.014-2.6388-4.4304-6.6662 11.86-6.298 18.938 0.42809 41.407 8.4427 53.703 19.155 22.948 19.994 31.256 34.649 27.484 48.487-0.94679 3.4737-2.0389 8.7462-2.4268 11.717-1.1622 8.8984-13.596 29.624-20.886 34.815-9.9341 7.0737-33.556 15.816-46.975 17.385-7.4496 0.87104-15.048 0.0927-21.059-2.1572zm45.937-16.05c16.625-8.2514 24.655-16.736 29.863-31.555 2.659-7.5653 4.8345-16.466 4.8345-19.778 0-7.9593-8.3822-22.638-17.701-30.998-14.45-12.962-48.206-25.695-46.756-17.638 0.2594 1.4422-1.5023 2.4592-3.9149 2.26s-3.8497 0.17465-3.1935 0.83078c0.65614 0.65613-2.3758 6.7952-6.7377 13.642-8.1961 12.866-16.853 35.036-19.52 49.989-2.5427 14.258 7.7261 33.668 20.815 39.347 6.1579 2.6713 32.202-1.0846 42.311-6.1019z"/>
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>Letter O or Zero</dc:title>
+        <dc:date>2010-04-22T06:54:37</dc:date>
+        <dc:description>These are some quick sketches and doodles I made in my notebook on a flight. These are mostly shit, but hey, lets see if useful!</dc:description>
+        <dc:source>https://openclipart.org/detail/50197/letter-o-or-zero-by-rejon</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>rejon</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>black</rdf:li>
+            <rdf:li>bw</rdf:li>
+            <rdf:li>drawings</rdf:li>
+            <rdf:li>fast</rdf:li>
+            <rdf:li>rapid</rdf:li>
+            <rdf:li>rejon</rdf:li>
+            <rdf:li>sketch</rdf:li>
+            <rdf:li>sketchbook</rdf:li>
+            <rdf:li>unchecked</rdf:li>
+            <rdf:li>white</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

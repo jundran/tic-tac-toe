@@ -1,23 +1,99 @@
 body {
-  margin: 0;
-}
-
-.container {
   min-height: 100vh;
+  margin: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+form ul {
+  padding: 0;
+  list-style: none;
+}
+form li {
+  margin-bottom: 16px;
+}
+form label {
+  margin-right: 32px;
+}
+
+h1 {
+  text-align: center;
+  font-style: italic;
+  font-family: serif;
+}
+h1.game {
+  font-family: cursive, serif;
+}
+
+button {
+  width: 50%;
+  padding: 8px;
+  color: purple;
+  font-weight: 600;
+  cursor: pointer;
+}
+button#play {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+
+.game-message {
+  box-sizing: border-box;
+  min-height: 40px;
+  background: purple;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-weight: 600;
+}
+.game-message.active {
+  padding: 0 32px;
+}
+
+.match-info,
+.game-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  font-weight: 600;
+}
+
+.match-info span {
+  padding: 5px 10px;
+}
+
+.active#player1 {
+  background: #0077ff;
+}
+.active#player2 {
+  background: #00ff77;
+}
+
 .gameboard {
+  width: min(95vw, 500px);
+  height: min(95vw, 500px);
   display: grid;
-  grid-template: repeat(3, 64px)/repeat(3, 64px);
+  grid-template: repeat(3, 1fr)/repeat(3, 1fr);
+  margin-bottom: 8px;
+  border: 3px solid purple;
 }
 .gameboard div {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid;
+  border: 3px solid purple;
 }
 
 /*# sourceMappingURL=index.css.map */

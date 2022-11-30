@@ -1,43 +1,38 @@
 "use strict"
-export default (function Gameboard() {
+export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) {
 
   // GLOBAL STATE
   const board = []
-  const players = []
-  let currentPlayer
+  const players = [...bothPlayers]
+  let round = 1
+  let currentPlayer = players[0]
+  let gameOver = false
 
   // FUNCTIONS
-  function generate(...bothPlayers) {
-    players.push(...bothPlayers)
-    currentPlayer = players[0]
-
-    for (let row = 0; row < 3; row++) {
-      board.push([])
-      for (let col = 0; col < 3; col++) {
-        board[row].push(`${row}-${col}`)
-        const square = document.createElement('div')
-        square.dataset.index = row + "-" + col
-        square.addEventListener('click', handleClick)
-        document.querySelector('.gameboard').appendChild(square)
-      }
-    }
-  }
-
   function handleClick(e) {
+    if(gameOver) return
     const square = e.target
-    if(square.textContent) return // square already marked
+    if(square.tagName === 'IMG') return // already marked
 
     // Mark square
     const [row, col] = square.dataset.index.split('-')
-    square.textContent = currentPlayer.getMark()
-    board[row][col] = currentPlayer.getMark()
+    if (board[row][col] instanceof Object) return // already marked
+    square.appendChild(currentPlayer.getMark())
+    board[row][col] = currentPlayer
 
-    // Check for winner or all squares full(tie)
-    if(checkForWinner()) return gameOver(currentPlayer)
-    if(board.every(square => players.includes(square))) gameOver()
+    // Check for winner or all squares full(draw)
+    if(checkForWinner()) {
+      setGameOver()
+      return setMessage(`${currentPlayer.getName()} has won the game!`)
+    }
 
     // Next round - change to other player
+    if(++round === 10 ) {
+      setGameOver()
+      return setMessage('The game is a draw.')
+    }
     currentPlayer = currentPlayer === players[0] ? players[1] : players[0]
+    setCurrentPlayer(currentPlayer)
   }
 
   function checkForWinner() {
@@ -49,16 +44,13 @@ export default (function Gameboard() {
     }
 
     function transpose() {
-      return board[0].map((_, colIndex) =>
-        board.map(row => row[colIndex])
-      )
+      return board[0].map((_, colIndex) => board.map(row => row[colIndex]))
     }
 
     function transposeDiagnol(rightToLeft) {
       return board[0].map((_, colIndex) =>
         board[colIndex][rightToLeft ? 2 - colIndex : colIndex]
-      )
-    }
+    )}
 
     return(
       checkRow(board) ||
@@ -68,10 +60,28 @@ export default (function Gameboard() {
     )
   }
 
-  function gameOver(winner) {
-    if (winner) console.log(`Winner is ${winner.getName()}`)
-    else console.log("It's a tie")
+  function setGameOver() {
+    gameOver = true
+    setCurrentPlayer(null)
   }
 
-  return { generate }
-})()
+  function generateGrid() {
+    const gameboard = document.createElement('div')
+    gameboard.className = 'gameboard'
+
+    for(let row = 0; row < 3; row++) {
+      board.push([])
+      for(let col = 0; col < 3; col++) {
+        // push row-col to make element unique for comparison in checkForWinner
+        board[row].push(`${row}-${col}`)
+        const square = document.createElement('div')
+        square.dataset.index = row + "-" + col
+        square.addEventListener('click', handleClick)
+        gameboard.appendChild(square)
+      }
+    }
+    return gameboard
+  }
+
+  return generateGrid()
+}

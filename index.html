@@ -5,13 +5,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/index.css">
-  <script src="scripts/index.js" defer type="module"></script>
-  <title>Tic Tac Toe</title>
+  <title>Noughts & Crosses</title>
 </head>
 <body>
 
 <div class="container">
-  <div class="gameboard"></div>
+  <h1>Noughts & Crosses</h1>
+  <form action="game.html" method="submit">
+    <ul>
+      <li>
+        <label for="player1">Player 1</label>
+        <input name="player1" id="player1" placeholder="optional">
+      </li>
+      <li>
+        <label for="player2">Player 2</label>
+        <input name="player2" id="player2" placeholder="optional">
+      </li>
+      <button id="play">Play</button>
+    </ul>
+  </form>
 </div>
 
 </body>
