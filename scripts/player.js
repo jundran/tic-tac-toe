@@ -25,12 +25,14 @@ export default function Player(n, isPlayer1) {
     return nought
   }
 
+  const getId = () => isPlayer1 ? 1 : 2
   const isPlayerOne = () => isPlayer1
   const isComputer = () => playAgainstComputer
   const getMark = isPlayer1 ? () => createCross() : () => createNought()
   const getName = () => name
 
   return {
+    getId,
     isComputer,
     isPlayerOne,
     getMark,
