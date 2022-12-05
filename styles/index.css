@@ -1,10 +1,7 @@
 body {
   min-height: 100vh;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  font-family: serif;
 }
 
 form ul {
@@ -21,10 +18,9 @@ form label {
 h1 {
   text-align: center;
   font-style: italic;
-  font-family: serif;
 }
 h1.game {
-  font-family: cursive, serif;
+  font-family: cursive;
 }
 
 button {
@@ -39,30 +35,33 @@ button#play {
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 8px;
 }
 
-.game-message {
-  box-sizing: border-box;
-  min-height: 40px;
-  background: purple;
-  color: white;
+.flex, .gameboard div, .game-message-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
-  font-weight: 600;
-}
-.game-message.active {
-  padding: 0 32px;
 }
 
-.match-info,
-.game-footer {
+.game-message-container {
+  box-sizing: border-box;
+  min-height: 39px;
+}
+
+.game-message {
+  width: fit-content;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: 600;
+  background: purple;
+}
+.game-message.active {
+  padding: 8px 32px;
+}
+
+.players,
+.footer-buttons {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -90,10 +89,13 @@ button#play {
   border: 3px solid purple;
 }
 .gameboard div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: 3px solid purple;
+}
+
+@media (max-width: 450px) {
+  .game-message-container {
+    margin-bottom: 8px;
+  }
 }
 
 /*# sourceMappingURL=index.css.map */

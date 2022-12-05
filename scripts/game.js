@@ -8,8 +8,8 @@ const params = new URLSearchParams(window.location.search)
 const computer = params.get('playAgainstComputer') == 'on' ? true : false
 const player1 = Player(params.get('player1'), true)
 const player2 = computer ? Player(null) : Player(params.get('player2'))
-document.querySelector('#player1').textContent = player1.getName()
-document.querySelector('#player2').textContent = player2.getName()
+document.querySelector('#player1').textContent = player1.playerName
+document.querySelector('#player2').textContent = player2.playerName
 newGame()
 
 function newGame() {
@@ -30,13 +30,8 @@ function setMessage(message) {
 }
 
 function setCurrentPlayer(player) {
-  document.querySelectorAll('.player').forEach(el => el.classList.remove('active'))
+  document.querySelectorAll('.players span').forEach(el => el.classList.remove('active'))
   if(!player) return
-
-  if(player.isPlayerOne()) {
-    document.querySelector('#player1').classList.add('active')
-  }
-  else {
-    document.querySelector('#player2').classList.add('active')
-  }
+  if(player.isPlayerOne) document.querySelector('#player1').classList.add('active')
+  else document.querySelector('#player2').classList.add('active')
 }

@@ -8,20 +8,20 @@
   <script src="scripts/game.js" defer type="module"></script>
   <title>Noughts & Crosses</title>
 </head>
-<body>
+<body class="flex">
 
 <div class="container">
   <h1 class="game">Noughts & Crosses</h1>
-  <div class="game-message"></div>
+  <div class="game-message-container"><div class="game-message"></div></div>
 
-  <div class="match-info">
-    <span id ="player1" class="player active"></span>
-    <span id ="player2" class="player"></span>
+  <div class="players">
+    <span id ="player1" class="active"></span>
+    <span id ="player2"></span>
   </div>
 
   <div class="gameboard"></div>
 
-  <div class="game-footer">
+  <div class="footer-buttons">
     <button onclick="window.location.href='index.html'">Change players</button>
     <button id="reset-button">Reset</button>
   </div>

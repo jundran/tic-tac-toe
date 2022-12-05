@@ -1,11 +1,11 @@
 "use strict"
 import { checkForWinner, checkForWinningSquare } from "./check.js"
 
-export default function(setMessage, setCurrentPlayer, ...bothPlayers) {
+export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) {
   // GLOBAL STATE
   const board = []
   const players = [...bothPlayers]
-  let round = 1
+  let roundNumber = 1
   let currentPlayer = players[0]
   let gameOver = false
   let timeout
@@ -13,55 +13,49 @@ export default function(setMessage, setCurrentPlayer, ...bothPlayers) {
   // FUNCTIONS
   function handleClick(e) {
     if(timeout || gameOver) return
-    const domSquare = e.target
-    if(domSquare.tagName === 'IMG') return // already marked
-
-    // Mark square
-    const [row, col] = domSquare.dataset.index.split('-')
+    if(e.target.tagName === 'IMG') return // already marked
+    const [row, col] = e.target.dataset.index.split('-')
     if (board[row][col].owner !== 0) return // already marked
-
-    endRound(domSquare, row, col)
+    endRound(e.target, row, col)
   }
 
   function computerMove() {
     timeout = null
-    let freeSquare = checkForWinningSquare(board, currentPlayer) ||
+    let square = checkForWinningSquare(board, currentPlayer) ||
       checkForWinningSquare(board, players[0])
-    console.log(freeSquare)
+    console.log(square)
 
     // Find a random free square
-    if(!freeSquare) {
-      const freeSquares = board.map(row => row.filter(square => square.owner === 0)).flat()
-      freeSquare = freeSquares[Math.floor(Math.random() * freeSquares.length)]
+    if(!square) {
+      const squares = board.map(row => row.filter(square => square.owner === 0)).flat()
+      square = squares[Math.floor(Math.random() * squares.length)]
     }
 
     // Find matching square in document
     const domSquares = [...document.querySelectorAll('.gameboard div')]
-    const domSquare = domSquares.find(s => s.dataset.index === `${freeSquare.row}-${freeSquare.col}`)
+    const domSquare = domSquares.find(s => s.dataset.index === `${square.row}-${square.col}`)
 
-    endRound(domSquare, freeSquare.row, freeSquare.col)
+    endRound(domSquare, square.row, square.col)
   }
 
   function endRound(domSquare, row, col) {
     // Draw mark and update square ownership in board array
-    domSquare.appendChild(currentPlayer.getMark())
-    board[row][col].owner = currentPlayer.getId()
+    domSquare.appendChild(currentPlayer.mark)
+    board[row][col].owner = currentPlayer.id
 
-    // Check for winner
     if(checkForWinner(board)) {
       setGameOver()
-      return setMessage(`${currentPlayer.getName()} has won the game!`)
+      return setMessage(`${currentPlayer.playerName} has won the game!`)
     }
 
-    // All squares are full
-    if(++round === 10 ) {
+    if(++roundNumber === 10 ) {
       setGameOver()
       return setMessage('The game is a draw.')
     }
 
     currentPlayer = currentPlayer === players[0] ? players[1] : players[0]
     setCurrentPlayer(currentPlayer)
-    if(currentPlayer.isComputer()) timeout = setTimeout(computerMove, 750)
+    if(currentPlayer.isComputer) timeout = setTimeout(computerMove, 750)
   }
 
   function setGameOver() {
@@ -69,22 +63,19 @@ export default function(setMessage, setCurrentPlayer, ...bothPlayers) {
     setCurrentPlayer(null)
   }
 
-  function generateGrid() {
-    const gameboard = document.createElement('div')
-    gameboard.className = 'gameboard'
+  // ENTRY POINT - Create and return gameboard
+  const gameboard = document.createElement('div')
+  gameboard.className = 'gameboard'
 
-    for(let row = 0; row < 3; row++) {
-      board.push([])
-      for(let col = 0; col < 3; col++) {
-        board[row].push({ row, col, owner: 0 })
-        const square = document.createElement('div')
-        square.dataset.index = row + "-" + col
-        square.addEventListener('click', handleClick)
-        gameboard.appendChild(square)
-      }
+  for(let row = 0; row < 3; row++) {
+    board.push([])
+    for(let col = 0; col < 3; col++) {
+      board[row].push({ row, col, owner: 0 })
+      const square = document.createElement('div')
+      square.dataset.index = row + "-" + col
+      square.addEventListener('click', handleClick)
+      gameboard.appendChild(square)
     }
-    return gameboard
   }
-
-  return generateGrid()
+  return gameboard
 }
