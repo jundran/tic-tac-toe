@@ -1,5 +1,5 @@
 "use strict"
-import { checkForWinner, checkForWinningSquare } from "./check.js"
+import { checkForWinner, checkForWinningSquare, getSquaresWithWinnablePaths } from "./check.js"
 
 export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) {
   // GLOBAL STATE
@@ -23,9 +23,16 @@ export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) 
     timeout = null
     let square = checkForWinningSquare(board, currentPlayer) ||
       checkForWinningSquare(board, players[0])
-    console.log(square)
 
-    // Find a random free square
+    // Get array of free squares that have a winnable path
+    if(!square) {
+      const winnable = getSquaresWithWinnablePaths(board)
+      const veryWinnable = winnable.filter(s => s.numPaths > 1)
+      const bestSquaresToPlay = veryWinnable.length ? veryWinnable : winnable
+      square = bestSquaresToPlay[Math.floor(Math.random() * bestSquaresToPlay.length)]
+    }
+
+    // Computer cannot win now so just find a random free square
     if(!square) {
       const squares = board.map(row => row.filter(square => square.owner === 0)).flat()
       square = squares[Math.floor(Math.random() * squares.length)]
