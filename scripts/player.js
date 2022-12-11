@@ -1,4 +1,3 @@
-"use strict"
 export default function Player(n, isPlayer1) {
   function getPlayerName() {
     if(n) return n

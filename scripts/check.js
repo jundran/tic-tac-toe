@@ -1,4 +1,3 @@
-"use strict"
 function transpose(board) {
   return board[0].map((_, colIndex) => board.map(row => row[colIndex]))
 }

@@ -1,7 +1,6 @@
-"use strict"
 import { checkForWinner, checkForWinningSquare, getSquaresWithWinnablePaths } from "./check.js"
 
-export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) {
+export default function Gameboard(setMessage, setCurrentPlayerInDom, ...bothPlayers) {
   // GLOBAL STATE
   const board = []
   const players = [...bothPlayers]
@@ -16,7 +15,7 @@ export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) 
     if(e.target.tagName === 'IMG') return // already marked
     const [row, col] = e.target.dataset.index.split('-')
     if (board[row][col].owner !== 0) return // already marked
-    endRound(e.target, row, col)
+    endRound(row, col, e.target)
   }
 
   function computerMove() {
@@ -38,17 +37,18 @@ export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) 
       square = squares[Math.floor(Math.random() * squares.length)]
     }
 
-    // Find matching square in document
-    const domSquares = [...document.querySelectorAll('.gameboard div')]
-    const domSquare = domSquares.find(s => s.dataset.index === `${square.row}-${square.col}`)
-
-    endRound(domSquare, square.row, square.col)
+    endRound(square.row, square.col, findDomSquare(square.row, square.col))
   }
 
-  function endRound(domSquare, row, col) {
-    // Draw mark and update square ownership in board array
-    domSquare.appendChild(currentPlayer.mark)
-    board[row][col].owner = currentPlayer.id
+  const findDomSquare = (row, col) =>
+    [...document.querySelectorAll('.gameboard div')].find(s => s.dataset.index === `${row}-${col}`)
+
+  const updateBoard = (row, col) => board[row][col].owner = currentPlayer.id
+  const updateDom = domSquare => domSquare.appendChild(currentPlayer.mark)
+
+  function endRound(row, col, domSquare) {
+    updateBoard(row, col)
+    updateDom(domSquare)
 
     if(checkForWinner(board)) {
       setGameOver()
@@ -60,14 +60,18 @@ export default function Gameboard(setMessage, setCurrentPlayer, ...bothPlayers) 
       return setMessage('The game is a draw.')
     }
 
-    currentPlayer = currentPlayer === players[0] ? players[1] : players[0]
-    setCurrentPlayer(currentPlayer)
+    setCurrentPlayer(currentPlayer === players[0] ? players[1] : players[0])
     if(currentPlayer.isComputer) timeout = setTimeout(computerMove, 750)
+  }
+
+  function setCurrentPlayer(player) {
+    currentPlayer = player
+    setCurrentPlayerInDom(player)
   }
 
   function setGameOver() {
     gameOver = true
-    setCurrentPlayer(null)
+    setCurrentPlayerInDom(null)
   }
 
   // ENTRY POINT - Create and return gameboard

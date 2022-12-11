@@ -15,7 +15,7 @@ The computer will do a number of checks to decide which square to play:
 ### Step 1
 Check for a winning square and play it.
 ### Step 2
-Check for player's winning square and block it.
+Check for the player's winning square and block it.
 ### Step 3
 Find squares with a potential path to victory. Then filter those squares again to prioritze those with two or more potential paths.
 
